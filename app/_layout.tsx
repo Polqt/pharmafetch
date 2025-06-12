@@ -1,12 +1,12 @@
 import { Stack } from 'expo-router'
 import React from 'react'
-import "./global.css"
+import '../global.css'
 
-const _layout = () => {
+export default function _layout() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
   )
 }
-
-export default _layout
