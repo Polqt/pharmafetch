@@ -5,9 +5,9 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#3b82f6', // A nice blue color
+        tabBarActiveTintColor: '#3b82f6', 
         headerStyle: {
-          backgroundColor: '#f8fafc', // Light gray header
+          backgroundColor: '#f8fafc', 
         },
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -20,7 +20,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => <FontAwesome name="home" color={color} size={size} />,
         }}
       />
-      {/* You can add more tabs here, e.g., for orders, profile, etc. */}
       <Tabs.Screen
         name="orders"
         options={{
