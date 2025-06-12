@@ -18,11 +18,18 @@ export default function WelcomeScreen() {
           Your reliable pharmacy, right at your fingertips.
         </Text>
       </View>
-      <View className="w-full pb-4">
-        <Link href="/(tabs)/home" asChild>
+      <View className="w-full pb-4 space-y-4">
+        <Link href="/(auth)/login" asChild>
           <TouchableOpacity className="bg-blue-600 active:bg-blue-700 p-4 rounded-full w-full">
             <Text className="text-white text-center text-lg font-semibold">
-              Get Started
+              Login
+            </Text>
+          </TouchableOpacity>
+        </Link>
+        <Link href="/(auth)/signup" asChild>
+          <TouchableOpacity className="bg-white border border-blue-600 active:bg-gray-100 p-4 rounded-full w-full">
+            <Text className="text-blue-600 text-center text-lg font-semibold">
+              Sign Up
             </Text>
           </TouchableOpacity>
         </Link>
