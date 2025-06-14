@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
-
-import * as WebBrowser from 'expo-web-browser';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { useState, useEffect } from 'react';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { auth } from '../../firebase';
 import { Link } from 'expo-router';
+import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
 import { FontAwesome } from '@expo/vector-icons';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 
-WebBrowser.maybeCompleteAuthSession()
+WebBrowser.maybeCompleteAuthSession();
 
-export default function login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    
-    const handleEmailLogin() => {
-        if (!email || !password) {
-            Alert.alert('Error', 'Please enter both email and password.');
-            return;
-        }
-        signInWithEmailAndPassword(auth, email, password)
-            .catch((error) => Alert.alert('Login Error', error.message));
+export default function LoginScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: process.env.EXPO_PUBLIC_WEB_CLIENT_ID,
+    iosClientId: process.env.EXPO_PUBLIC_IOS_CLIENT_ID,
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { id_token } = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential)
+        .catch(error => Alert.alert('Google Sign-In Error', error.message));
     }
+  }, [response]);
+
+  const handleEmailLogin = () => {
+    if (!email || !password) {
+        Alert.alert('Error', 'Please enter both email and password.');
+        return;
+    }
+    signInWithEmailAndPassword(auth, email, password)
+      .catch((error) => Alert.alert('Login Error', error.message));
+  };
+
   return (
     <View className="flex-1 justify-center bg-gray-50 p-6">
       <Text className="text-4xl font-extrabold mb-2 text-center text-gray-800">Welcome Back</Text>
@@ -59,5 +75,5 @@ export default function login() {
         </Link>
       </View>
     </View>
-  )
+  );
 }
