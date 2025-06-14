@@ -33,10 +33,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (!userDoc.exists()) {
           await setDoc(userDocRef, {
             name: user.displayName,
-            emmail: user.email,
+            email: user.email,
             uid: user.uid,
             createdAt: new Date(),
-          })
+          });
         }
         setUser(user);
       } else {
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const logout = () => {
-    signOut(auth)
+    signOut(auth);
     setUser(null);
   };
 
@@ -61,3 +61,5 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+export default AuthProvider;

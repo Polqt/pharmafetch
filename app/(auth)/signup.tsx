@@ -1,8 +1,9 @@
-import { auth } from '@/firebase';
+
 import { createUserWithEmailAndPassword, updateProfile } from '@firebase/auth';
 import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { auth } from '../../firebase'; 
 
 export default function SignupScreen() {
   const [name, setName] = useState('');

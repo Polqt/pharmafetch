@@ -55,17 +55,10 @@ export default function LoginScreen() {
       </View>
 
       <TouchableOpacity onPress={() => promptAsync()} disabled={!request} className="bg-white border border-gray-300 p-4 rounded-lg flex-row items-center justify-center mb-4 shadow-sm">
-        <FontAwesome name="google" size={20} color="#DB4437" className="mr-3" />
+        <FontAwesome name="google" size={20} color="#DB4437" style={{ marginRight: 12 }} />
         <Text className="text-gray-700 font-semibold">Continue with Google</Text>
       </TouchableOpacity>
 
-      <Link href="/(auth)/phone" asChild>
-        <TouchableOpacity className="bg-green-500 p-4 rounded-lg flex-row items-center justify-center shadow">
-            <FontAwesome name="phone" size={20} color="white" className="mr-3" />
-            <Text className="text-white font-semibold">Continue with Phone</Text>
-        </TouchableOpacity>
-      </Link>
-      
       <View className="flex-row justify-center mt-8">
         <Text className="text-gray-600">Don&apos;t have an account? </Text>
         <Link href="/(auth)/signup" asChild>

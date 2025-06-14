@@ -20,13 +20,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => <FontAwesome name="home" color={color} size={size} />,
         }}
       />
-      <Tabs.Screen
-        name="orders"
-        options={{
-          title: 'Orders',
-          tabBarIcon: ({ color, size }) => <FontAwesome name="list-alt" color={color} size={size} />,
-        }}
-      />
     </Tabs>
   );
 }

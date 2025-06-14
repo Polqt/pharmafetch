@@ -1,6 +1,6 @@
 import { SplashScreen, Stack, useRouter, useSegments } from 'expo-router';
 import React, { useEffect } from 'react';
-import CustomSplashScreen from '../components/SplashScreen'; // Assuming you have a splash screen component
+import CustomSplashScreen from '../components/SplashScreen';
 import '../global.css';
 import { AuthProvider, useAuth } from './(contexts)/AuthContext';
 
@@ -16,11 +16,9 @@ const InitialLayout = () => {
 
     const inAuthGroup = segments[0] === '(auth)';
 
-    if (isAuthenticated && !inAuthGroup) {
-      // We are authenticated and not in any auth group, so we should be in the app.
+    if (isAuthenticated && inAuthGroup) {
       router.replace('/(tabs)/home');
-    } else if (!isAuthenticated) {
-      // We are not authenticated, so we should be in the auth flow.
+    } else if (!isAuthenticated && !inAuthGroup) {
       router.replace('/(auth)/login');
     }
     
@@ -33,18 +31,20 @@ const InitialLayout = () => {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="(tabs)" />
     </Stack>
-  )
-}
+  );
+};
 
-export default function RootLayout() {
+const RootLayout = () => {
   return (
     <AuthProvider>
       <InitialLayout />
     </AuthProvider>
   );
-}
+};
+
+export default RootLayout;
