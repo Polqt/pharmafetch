@@ -1,6 +1,7 @@
-import { Tabs } from "expo-router";
+import { useAuthStore } from "@/store/authStore";
+import { Redirect, Tabs } from "expo-router";
 import React from "react";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 
 const TabIcon = ({
   focused,
@@ -20,6 +21,9 @@ const TabIcon = ({
 };
 
 export default function TabsLayout() {
+  const isAuthenticated = useAuthStore();
+
+  if (!isAuthenticated) return <Redirect href={"/(auth)/login"} />;
   return (
     <Tabs>
       <Tabs.Screen
@@ -43,22 +47,22 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="home"
+        name="map"
         options={{
           title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="home" title="Home" />
+            <TabIcon focused={focused} icon="home" title="Map" />
           ),
         }}
       />
       <Tabs.Screen
-        name="home"
+        name="search"
         options={{
-          title: "Home",
+          title: "Search",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="home" title="Home" />
+            <TabIcon focused={focused} icon="search" title="Search" />
           ),
         }}
       />

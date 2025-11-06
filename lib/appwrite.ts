@@ -33,7 +33,7 @@ export const createUser = async ({
       `${firstName} ${lastName}`,
     );
 
-    if (!newAccount) throw Error;
+    if (!newAccount) throw new Error("Account creation failed");
 
     await signIn({ email, password });
 

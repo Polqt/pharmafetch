@@ -33,3 +33,29 @@ export const dateOfBirthSchema = z.object({
       { message: "You must be at least 18 years old" },
     ),
 });
+
+export const credentialsSchema = z
+  .object({
+    email: z.string().email("Invalid email address").toLowerCase().trim(),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+export const signUpSchema = personalInfoSchema
+  .merge(dateOfBirthSchema)
+  .merge(credentialsSchema);
+
+export const signInSchema = z.object({
+  email: z.string().email("Invalid email address").toLowerCase().trim(),
+  password: z.string().min(1, "Password is required"),
+});
+
+export type PersonalInfoForm = z.infer<typeof personalInfoSchema>;
+export type DateOfBirthForm = z.infer<typeof dateOfBirthSchema>;
+export type CredentialsForm = z.infer<typeof credentialsSchema>;
+export type SignUpForm = z.infer<typeof signUpSchema>;
+export type SignInForm = z.infer<typeof signInSchema>;

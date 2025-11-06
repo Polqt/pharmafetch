@@ -10,6 +10,7 @@ export function QueryProvider({ children }: PropsWithChildren) {
             retry: 2,
             staleTime: 1000 * 6 * 5,
             gcTime: 1000 * 6 * 10,
+            refetchOnWindowFocus: false,
           },
           mutations: {
             retry: 1,

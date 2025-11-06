@@ -46,7 +46,15 @@
         }
       ],
       "expo-font",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "pharmafeftch",
+          "organization": "usls-40"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
