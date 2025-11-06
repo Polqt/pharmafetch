@@ -1,18 +1,19 @@
-import { Account, Client, Databases, ID } from "react-native-appwrite";
+import { Account, Client, Databases, ID, Query } from "react-native-appwrite";
+import Constants from "expo-constants";
 
-export const appwriteConfig = {
-  endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
-  platform: "com.jpy.pharmafetch",
-  projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
-  databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID,
+export const appConfig = {
+  appwrite: {
+    endpoint: Constants.expoConfig?.extra?.appwriteEndpoint,
+    projectId: Constants.expoConfig?.extra?.appwriteProjectId,
+    databaseId: Constants.expoConfig?.extra?.appwriteDatabaseId,
+  },
 };
 
 export const client = new Client();
 
 client
-  .setEndpoint(appwriteConfig.endpoint!)
-  .setProject(appwriteConfig.projectId!)
-  .setPlatform(appwriteConfig.platform!);
+  .setEndpoint(appConfig.appwrite.endpoint!)
+  .setProject(appConfig.appwrite.projectId!);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
@@ -29,7 +30,7 @@ export const createUser = async ({
       ID.unique(),
       email,
       password,
-      firstName,
+      `${firstName} ${lastName}`,
     );
 
     if (!newAccount) throw Error;
@@ -37,27 +38,59 @@ export const createUser = async ({
     await signIn({ email, password });
 
     return await databases.createDocument(
-      appwriteConfig.databaseId!,
+      appConfig.appwrite.databaseId!,
       "users",
       ID.unique(),
       {
         email,
-        password,
         accountId: newAccount.$id,
         firstName,
         lastName,
         dateOfBirth,
       },
     );
-  } catch (error) {
-    throw new Error("Failed to create user", error as any);
+  } catch (e) {
+    console.error(e);
+    throw new Error("Failed to create user");
   }
 };
 
 export const signIn = async ({ email, password }: SignInParams) => {
   try {
     const session = await account.createEmailPasswordSession(email, password);
+
+    return session;
   } catch (e) {
-    throw new Error("Failed to sign in", e as any);
+    console.log(e);
+    throw new Error("Failed to sign in");
+  }
+};
+
+export const signOut = async () => {
+  try {
+    await account.deleteSession("current");
+  } catch (e) {
+    console.log(e);
+    throw new Error("Failed to sign out");
+  }
+};
+
+export const getCurrentUser = async () => {
+  try {
+    const user = await account.get();
+    if (!user) throw Error;
+
+    const currentUser = await databases.listDocuments(
+      appConfig.appwrite.databaseId!,
+      "users",
+      [Query.equal("accountId", user.$id)],
+    );
+
+    if (!currentUser) throw Error;
+
+    return currentUser.documents[0];
+  } catch (e) {
+    console.log(e);
+    throw new Error("Failed to get current user");
   }
 };

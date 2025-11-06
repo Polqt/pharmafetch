@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { PortalHost } from "@rn-primitives/portal";
 import { StatusBar } from "react-native";
 import { useFonts } from "expo-font";
+import { QueryProvider } from "./providers/QueryProvider";
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -24,10 +25,10 @@ export default function RootLayout() {
   }
 
   return (
-    <>
+    <QueryProvider>
       <StatusBar hidden={true} />
       <Stack screenOptions={{ headerShown: false }} />
       <PortalHost />
-    </>
+    </QueryProvider>
   );
 }

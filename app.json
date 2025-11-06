@@ -11,6 +11,11 @@
     "ios": {
       "supportsTablet": true
     },
+    "extra": {
+      "appwriteEndpoint": "https://fra.cloud.appwrite.io/v1",
+      "appwriteProjectId": "6908abaf001fc3398b8c",
+      "appwriteDatabaseId": "6908ad84001d866b1eaf"
+    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -40,7 +45,8 @@
           }
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,
