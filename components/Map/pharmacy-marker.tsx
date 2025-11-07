@@ -1,10 +1,30 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Image } from "react-native";
+import { Marker } from "react-native-maps";
 
-export default function PharmacyMarker() {
+export default function PharmacyMarker({
+  pharmacy,
+  isSelected,
+  onPress,
+}: PharmacyMarkerProps) {
   return (
-    <View>
-      <Text>Pharmacy Marker</Text>
-    </View>
+    <Marker
+      coordinate={{
+        latitude: pharmacy.latitude,
+        longitude: pharmacy.longitude,
+      }}
+      onPress={() => onPress(pharmacy)}
+      tracksViewChanges={false}
+    >
+      <Image
+        source={
+          isSelected
+            ? require("@/assets/images/marker-green.png")
+            : require("@/assets/images/marker-red.png")
+        }
+        resizeMode="contain"
+        style={{ width: 40, height: 50 }}
+      />
+    </Marker>
   );
 }

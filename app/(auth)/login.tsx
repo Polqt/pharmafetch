@@ -83,7 +83,7 @@ export default function Login() {
 
             <View className="flex-row justify-center items-center mt-6">
               <Text className="text-muted-foreground">
-                Don&apos;t have an account?{' '}
+                Don&apos;t have an account?{" "}
               </Text>
               <Link href={"/(auth)/signup"} asChild>
                 <Button variant={"link"} className="p-0">

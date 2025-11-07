@@ -12,10 +12,23 @@ interface Pharmacy {
   image?: string;
 }
 
+interface PharmacyCardProps {
+  pharmacy: Pharmacy;
+  isSelected: boolean;
+  onPress?: () => void;
+}
+
 interface PharmacyMarkerProps {
   pharmacy: Pharmacy;
   isSelected: boolean;
   onPress: (pharmacy: Pharmacy) => void;
+}
+
+interface PharmacyBottomSheetProps {
+  visible: boolean;
+  pharmacies: Pharmacy[];
+  selectedPharmacy: Pharmacy | null;
+  onClose: () => void;
 }
 
 interface MapRegion {

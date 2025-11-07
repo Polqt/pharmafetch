@@ -7,13 +7,11 @@ const queryClient = new QueryClient({
       retry: 1,
     },
   },
-})
+});
 
 export function QueryProvider({ children }: { children: React.ReactNode }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
 

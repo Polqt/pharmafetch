@@ -37,7 +37,7 @@ export const createUser = async ({
 
     if (!newAccount) throw new Error("Account creation failed");
 
-    await signIn({ email,  password: password });
+    await signIn({ email, password: password });
 
     return await databases.createDocument(
       appConfig.appwrite.databaseId!,
