@@ -20,7 +20,7 @@ export function useAuth() {
     onSuccess: async (data) => {
       setUser(data);
       queryClient.setQueryData(["currentUser"], data);
-      router.replace("/(tabs)/home");
+      router.replace("/(auth)/login");
     },
     onError: (error: Error) => {
       console.error("Sign up error: ", error);

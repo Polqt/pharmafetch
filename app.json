@@ -9,12 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "package": "com.jpy.pharmafetch"
     },
     "extra": {
       "appwriteEndpoint": "https://fra.cloud.appwrite.io/v1",
       "appwriteProjectId": "6908abaf001fc3398b8c",
-      "appwriteDatabaseId": "6908ad84001d866b1eaf"
+      "appwriteDatabaseId": "6908ad84001d866b1eaf",
+      "appwriteUserTableId": "user",
+      "appwritePharmacyTableId": "pharmacy"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,13 +26,15 @@
         "backgroundImage": "",
         "monochromeImage": ""
       },
+      "package": "com.jpy.pharmafetch",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
       "favicon": "",
-      "bundler": "metro"
+      "bundler": "metro",
+      "package": "com.jpy.pharmafetch"
     },
     "plugins": [
       "expo-router",

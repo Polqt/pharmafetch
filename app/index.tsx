@@ -6,7 +6,7 @@ export default function Index() {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/(auth)/login");
+    router.push("/login");
   };
 
   return (

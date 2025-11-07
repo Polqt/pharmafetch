@@ -37,19 +37,9 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="home"
-        options={{
-          title: "Home",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="home" title="Home" />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="map"
         options={{
-          title: "Home",
+          title: "Map",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon="home" title="Map" />

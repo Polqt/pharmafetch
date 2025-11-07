@@ -6,6 +6,7 @@ export const appConfig = {
     endpoint: Constants.expoConfig?.extra?.appwriteEndpoint,
     projectId: Constants.expoConfig?.extra?.appwriteProjectId,
     databaseId: Constants.expoConfig?.extra?.appwriteDatabaseId,
+    userTableId: Constants.expoConfig?.extra?.appwriteUserTableId,
   },
 };
 
@@ -13,7 +14,8 @@ export const client = new Client();
 
 client
   .setEndpoint(appConfig.appwrite.endpoint!)
-  .setProject(appConfig.appwrite.projectId!);
+  .setProject(appConfig.appwrite.projectId!)
+  .setPlatform("com.jpy.pharmafetch");
 
 export const account = new Account(client);
 export const databases = new Databases(client);
@@ -35,11 +37,11 @@ export const createUser = async ({
 
     if (!newAccount) throw new Error("Account creation failed");
 
-    await signIn({ email, password });
+    await signIn({ email,  password: password });
 
     return await databases.createDocument(
       appConfig.appwrite.databaseId!,
-      "users",
+      appConfig.appwrite.userTableId!,
       ID.unique(),
       {
         email,
@@ -57,8 +59,8 @@ export const createUser = async ({
 
 export const signIn = async ({ email, password }: SignInParams) => {
   try {
+    await account.deleteSession("current");
     const session = await account.createEmailPasswordSession(email, password);
-
     return session;
   } catch (e) {
     console.log(e);
@@ -82,7 +84,7 @@ export const getCurrentUser = async () => {
 
     const currentUser = await databases.listDocuments(
       appConfig.appwrite.databaseId!,
-      "users",
+      appConfig.appwrite.userTableId!,
       [Query.equal("accountId", user.$id)],
     );
 

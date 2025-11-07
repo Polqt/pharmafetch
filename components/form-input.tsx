@@ -44,6 +44,7 @@ export default function FormInput<T extends FieldValues>({
               keyboardType={keyboardType}
               autoCapitalize={autoCapitalize}
               autoComplete={autoComplete}
+              className="bg-primary"
             />
             {error && (
               <Text className="text-sm text-destructive">{error.message}</Text>
