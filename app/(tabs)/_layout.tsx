@@ -1,7 +1,8 @@
 import { useAuthStore } from "@/store/authStore";
 import { Redirect } from "expo-router";
 import React from "react";
-import { NativeTabs, Icon, Label } from "expo-router/unstable-native-tabs";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { NativeTabs, Label } from "expo-router/unstable-native-tabs";
 
 export default function TabsLayout() {
   const { isAuthenticated } = useAuthStore();
@@ -12,28 +13,23 @@ export default function TabsLayout() {
     <NativeTabs>
       <NativeTabs.Trigger name="home">
         <Label>Home</Label>
-        <Icon sf={{ default: "house", selected: "house.fill" }} />
+        <Ionicons name="home" size={24} color={"#74B3C3"} />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="map">
         <Label>Map</Label>
-        <Icon sf={{ default: "map", selected: "map.fill" }} />
+        <Ionicons name="map" size={24} color={"#74B3C3"} />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="profile">
         <Label>Profile</Label>
-        <Icon sf={{ default: "person", selected: "person.fill" }} />
+        <Ionicons name="person" size={24} color={"#74B3C3"} />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="medicine">
         <Label>Medicine</Label>
-        <Icon sf={{ default: "pill", selected: "pill.fill" }} />
+        <Ionicons name="medkit" size={24} color={"#74B3C3"} />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="search">
         <Label>Search</Label>
-        <Icon
-          sf={{
-            default: "magnifyingglass.circle",
-            selected: "magnifyingglass.circle.fill",
-          }}
-        />
+        <Ionicons name="search" size={24} color={"#74B3C3"} />
       </NativeTabs.Trigger>
     </NativeTabs>
   );

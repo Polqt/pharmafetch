@@ -63,7 +63,7 @@ export default function Map() {
         <MapView
           ref={mapRef}
           provider={PROVIDER_GOOGLE}
-          className="flex-1"
+          style={{ flex: 1 }}
           initialRegion={NEGROS_OCCIDENTAL_CENTER}
           showsUserLocation
           showsMyLocationButton
