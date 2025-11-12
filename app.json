@@ -9,8 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "package": "com.jpy.pharmafetch"
+      "supportsTablet": true
     },
     "extra": {
       "appwriteEndpoint": "https://fra.cloud.appwrite.io/v1",
@@ -28,7 +27,12 @@
       },
       "package": "com.jpy.pharmafetch",
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "config": {
+        "googleMaps": {
+          "apiKey": "process.env.EXPO_PUBLIC_GOOGLE_MAP_API_KEY"
+        }
+      }
     },
     "web": {
       "output": "static",

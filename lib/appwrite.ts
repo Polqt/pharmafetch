@@ -61,7 +61,7 @@ export const signIn = async ({ email, password }: SignInParams) => {
   try {
     await account.deleteSession("current");
     const session = await account.createEmailPasswordSession(email, password);
-    return session;
+    return session
   } catch (e) {
     console.log(e);
     throw new Error("Failed to sign in");

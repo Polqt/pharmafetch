@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
-import { FadeInDown, FadeOutDown } from "react-native-reanimated";
-import { AnimatedView } from "react-native-reanimated/lib/typescript/component/View";
+import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 import PharmacyCard from "./pharmacy-card";
 
 export default function PharmacyButtonSheet({
@@ -13,7 +12,7 @@ export default function PharmacyButtonSheet({
   if (!visible) return null;
 
   return (
-    <AnimatedView
+    <Animated.View
       entering={FadeInDown.duration(300)}
       exiting={FadeOutDown.duration(300)}
       className="absoulute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl"
@@ -37,6 +36,6 @@ export default function PharmacyButtonSheet({
           />
         ))}
       </ScrollView>
-    </AnimatedView>
+    </Animated.View>
   );
 }

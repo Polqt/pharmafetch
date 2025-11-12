@@ -1,61 +1,40 @@
 import { useAuthStore } from "@/store/authStore";
-import { Redirect, Tabs } from "expo-router";
+import { Redirect } from "expo-router";
 import React from "react";
-import { View } from "react-native";
-
-const TabIcon = ({
-  focused,
-  icon,
-  title,
-}: {
-  focused: boolean;
-  icon: string;
-  title: string;
-}) => {
-  if (focused) {
-  } else {
-    return (
-      <View className="size-full justify-center items-center mt-4 rounded-full"></View>
-    );
-  }
-};
+import { NativeTabs, Icon, Label } from "expo-router/unstable-native-tabs";
 
 export default function TabsLayout() {
-  const isAuthenticated = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
 
   if (!isAuthenticated) return <Redirect href={"/(auth)/login"} />;
+
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: "Home",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="home" title="Home" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="map"
-        options={{
-          title: "Map",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="home" title="Map" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="search"
-        options={{
-          title: "Search",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="search" title="Search" />
-          ),
-        }}
-      />
-    </Tabs>
+    <NativeTabs>
+      <NativeTabs.Trigger name="home">
+        <Label>Home</Label>
+        <Icon sf={{ default: "house", selected: "house.fill" }} />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="map">
+        <Label>Map</Label>
+        <Icon sf={{ default: "map", selected: "map.fill" }} />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="profile">
+        <Label>Profile</Label>
+        <Icon sf={{ default: "person", selected: "person.fill" }} />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="medicine">
+        <Label>Medicine</Label>
+        <Icon sf={{ default: "pill", selected: "pill.fill" }} />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="search">
+        <Label>Search</Label>
+        <Icon
+          sf={{
+            default: "magnifyingglass.circle",
+            selected: "magnifyingglass.circle.fill",
+          }}
+        />
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }

@@ -8,6 +8,7 @@ import { fitMarkersToMap, NEGROS_OCCIDENTAL_CENTER } from "@/utils/mapHelper";
 import React, { useEffect, useRef } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Map() {
   const mapRef = useRef<MapView>(null);
@@ -57,31 +58,33 @@ export default function Map() {
   }
 
   return (
-    <View className="flex-1">
-      <MapView
-        ref={mapRef}
-        provider={PROVIDER_GOOGLE}
-        className="flex-1"
-        initialRegion={NEGROS_OCCIDENTAL_CENTER}
-        showsUserLocation
-        showsMyLocationButton
-      >
-        {sortedPharmacies.map((pharmacy) => (
-          <PharmacyMarker
-            key={pharmacy.$id}
-            pharmacy={pharmacy}
-            isSelected={selectedPharmacy?.$id === pharmacy.$id}
-            onPress={handleMarkerPress}
-          />
-        ))}
-      </MapView>
+    <SafeAreaView className="flex-1">
+      <View className="flex-1">
+        <MapView
+          ref={mapRef}
+          provider={PROVIDER_GOOGLE}
+          className="flex-1"
+          initialRegion={NEGROS_OCCIDENTAL_CENTER}
+          showsUserLocation
+          showsMyLocationButton
+        >
+          {sortedPharmacies.map((pharmacy) => (
+            <PharmacyMarker
+              key={pharmacy.$id}
+              pharmacy={pharmacy}
+              isSelected={selectedPharmacy?.$id === pharmacy.$id}
+              onPress={handleMarkerPress}
+            />
+          ))}
+        </MapView>
 
-      <PharmacyButtonSheet
-        visible={isBottomSheetVisible}
-        pharmacies={sortedPharmacies.slice(0, 5)}
-        selectedPharmacy={selectedPharmacy}
-        onClose={handleCloseBottomSheet}
-      />
-    </View>
+        <PharmacyButtonSheet
+          visible={isBottomSheetVisible}
+          pharmacies={sortedPharmacies.slice(0, 5)}
+          selectedPharmacy={selectedPharmacy}
+          onClose={handleCloseBottomSheet}
+        />
+      </View>
+    </SafeAreaView>
   );
 }

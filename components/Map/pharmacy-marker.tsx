@@ -20,7 +20,7 @@ export default function PharmacyMarker({
         source={
           isSelected
             ? require("@/assets/images/marker-green.png")
-            : require("@/assets/images/marker-red.png")
+            : require("@/assets/images/marker-green.png")
         }
         resizeMode="contain"
         style={{ width: 40, height: 50 }}
